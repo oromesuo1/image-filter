@@ -12,6 +12,14 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   
   // Use the body parser middleware for post requests
   app.use(bodyParser.json());
+  
+  // Cleanup local disk after sending response.
+  app.use('/filteredimage', (req,res, next)=>{
+    res.once('finish', () => {
+      deleteLocalFiles([res.locals.image]);
+    });
+    next();
+  })
 
   // @TODO1 IMPLEMENT A RESTFUL ENDPOINT
   // GET /filteredimage?image_url={{URL}}
