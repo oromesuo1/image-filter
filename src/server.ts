@@ -37,8 +37,8 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
   app.get('/filteredimage', async (req, res) =>{
     try{
-     const image_url = req.query.image_url;
-     const splitByColon = image_url.split(':');
+     const image_url: string = req.query.image_url;
+     const splitByColon: Array<string> = image_url.split(':');
      
      // Check whether image_url is set
      if (!image_url) {
@@ -52,7 +52,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
    }
    
    // Get the image
-    const filteredImage = await filterImageFromURL(image_url);
+    const filteredImage: string = await filterImageFromURL(image_url);
      //  console.log(image);
      res.locals.filteredImage = filteredImage;
       res.status(200).sendFile(filteredImage);
