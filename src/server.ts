@@ -14,7 +14,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   app.use(bodyParser.json());
   
   // Cleanup local disk after sending response.
-  app.use('/filteredimage', (req,res, next)=>{
+  app.use('/filteredimage', (req: express.Request, res: express.Response, next)=>{
     res.once('finish', () => {
       deleteLocalFiles([res.locals.image]);
     });
@@ -35,7 +35,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   // RETURNS
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
-  app.get('/filteredimage', async (req, res) =>{
+  app.get('/filteredimage', async (req: express.Request, res: express.Response) =>{
     try{
      const image_url: string = req.query.image_url;
      const splitByColon: Array<string> = image_url.split(':');
@@ -71,7 +71,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   
   // Root Endpoint
   // Displays a simple message to the user
-  app.get( "/", async ( req, res ) => {
+  app.get( "/", async ( req: express.Request, res: express.Response ) => {
     res.send("try GET /filteredimage?image_url={{}}")
   } );
   
